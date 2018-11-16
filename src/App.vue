@@ -1,75 +1,46 @@
-
 <template>
-<div>
-  <div class="col-md-4">
-    <navigation-bar />
-   
-    <div class="container">
-      <message-list :messages="messages" />
-      <message-form/>
-    </div>
+  <div id="app">
+  <nav>
+    <button @click="go(-1)" class="btn btn-default">Backward</button>
+    <!-- <button @click="navigateToRoute('/hello')">/Hello</button>
+    <button @click="navigateToRoute('/vue_chat')">实时监控</button>
+    <button @click="navigateToRoute('/rpd_container')">农电域页面</button> -->
+    <router-link to="/hello" tag="button" active-class="active" class="btn btn-default">Hello</router-link>
+    <router-link to="/vue_chat" tag="button" active-class="active" class="btn btn-default">实时监控</router-link>
+    <router-link to="/rpd_container" tag="button" active-class="active" class="btn btn-default">农电域控制</router-link>
+    <button @click="go(1)" class="btn btn-default">Forward</button>
+  </nav>
+
+
+    <router-view/>
   </div>
-  <div class="col-md-2">
-    <poll/>
-  </div>
-  <div class="col-md-6">
-    <vote-chart :votes="votes"/>
-  </div>
-   <connection-status :isConnected="isConnected" />
-</div>
 </template>
 
 <script>
-import MessageList from './components/MessageList.vue';
-import MessageForm from './components/MessageForm.vue';
-import VoteChart from './components/VoteChart.vue';
-import Poll from './components/Poll.vue';
-
 export default {
-  data() {
+  name: 'app',
+  data () {
     return {
-      isConnected: false,
-      messages: [
-        // {id : 1,
-        // username: 'Paul',
-        // message: 'Hey!',
-        // },
-        // {id : 2,
-        // username: 'Evan',
-        // message: 'How are you?',
-        // },
-      ],
-      votes:[]
-    };
-  },
-  components: {
-    MessageList,
-    MessageForm,
-    VoteChart,
-    Poll
-  },
-  sockets: {
-    connect() {
-      this.isConnected = true;
-    },
-    disconnect() {
-      this.isConnected = false;
-    },
-    chatMessage(messages) {
-      this.messages = messages;
-    },
-    pollMessage(votes){
-      console.log(JSON.stringify(votes));
-      this.votes = votes;
+      msg: 'Welcome to Your Vue.js App'
     }
-  }
-};
-
+  },
+  methods: {
+    navigateToRoute(routeName) {
+      this.$router.push({ path: routeName });
+    },
+    go(step){
+      this.$router.go(step);
+    }
+  },
+}
 </script>
 
 <style>
   .container {
     width: 300px;
     margin: 0 auto;
+  }
+  .btn{
+    font-size:1rem;
   }
 </style>

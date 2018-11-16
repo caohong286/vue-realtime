@@ -6,7 +6,7 @@
             <input type="radio" name="charts" id="piechart" @click="toggleChart()" value="piechart">
             <label for="piechart">Pie Chart</label>
         </p>
-        <div id="main" style="width: 600px;height: 400px;"></div>
+        <div id="main" style="width: 100%;height: 25rem"></div>
 	</div>
 </template>
 <script>
@@ -117,6 +117,7 @@
                      name:'访问来源',
                      type:'pie',
                      radius:['50%','70%'],
+                     center:['55%','45%'],
                      avoidLabelOverlap: false,
                      label: {
                        normal: {
@@ -157,7 +158,7 @@
 				    grid: {
 				        left: '3%',
 				        right: '4%',
-				        bottom: '10%',
+				        bottom: '16%',
 				        containLabel: true
 				    },
 				    xAxis : [
